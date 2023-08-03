@@ -8,14 +8,14 @@ import * as cors from "cors";
 const app = express();
 
 const corsOptions: cors.CorsOptions = {
-  origin: "*", // Allow requests from any site
+  origin: "*", //requests from any site
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
 
 app.set("view engine", "ejs");
-app.use(cors(corsOptions)); // Use the configured CORS options
+app.use(cors(corsOptions));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -62,7 +62,7 @@ async function authenticateAndSaveToken(selectedSite: WordPressSite): Promise<vo
     });
 
     const user = response.data;
-    jwtToken = user.token; // Save the JWT token to the variable
+    jwtToken = user.token;
 
   } catch (error) {
     console.error(error);
@@ -71,19 +71,18 @@ async function authenticateAndSaveToken(selectedSite: WordPressSite): Promise<vo
 
 // Function to add a post
 async function addPost(req: Request, res: Response, siteName: string): Promise<void> {
-  // Authenticate and get the JWT token for the selected site
+  
   const selectedSite = wordpressSites.find((site) => site.siteName === siteName);
 
   if (!selectedSite) {
-    // Site not found in the list
     throw res.send("Invalid site selection.");
   }
 
   await authenticateAndSaveToken(selectedSite);
 
-  // Use the selected site's API URL and API key from the form parameter
+  
   const apiUrl = `http://${selectedSite.siteName}.local/wp-json/wp/v2/posts`;
-  const apiKey = req.body.apiKey; // Access the API key from the form parameter
+  const apiKey = req.body.apiKey;
 
   const post = {
     title: req.body.title,
@@ -96,7 +95,7 @@ async function addPost(req: Request, res: Response, siteName: string): Promise<v
       headers: {
         Authorization: `Bearer ${jwtToken}`,
         "Content-Type": "application/json",
-        apiKey: apiKey, // Include the API key in the headers
+        apiKey: apiKey,
       },
     });
 
@@ -104,10 +103,8 @@ async function addPost(req: Request, res: Response, siteName: string): Promise<v
     // console.log("API Response:", responseData);
 
     if (response.status === 201) {
-      // Post created successfully
       res.send("Post created successfully!");
     } else {
-      // Handle other status codes if needed
       res.send("Error creating this post.");
     }
   } catch (error) {
@@ -118,10 +115,8 @@ async function addPost(req: Request, res: Response, siteName: string): Promise<v
 
 app.get("/create-post", function (req: Request, res: Response) {
   const apiKey = req.query.apiKey;
-  const siteName = req.query.siteName; // Extract siteName from the query parameter
-
+  const siteName = req.query.siteName; 
   if (!siteName) {
-    // If siteName is not provided, redirect back to the success page or show an error message
     return res.redirect("/");
   }
 
@@ -138,14 +133,11 @@ app.post("/", function (req: Request, res: Response) {
   const email = req.body.email;
   const password = req.body.password;
 
-  // Check if the user exists and the password is correct
   const user = users.find((user) => user.email === email && user.password === password);
 
   if (user) {
-    // Successful login
     res.render("success", { wordpressSites, selectedSite: req.body.siteName });
   } else {
-    // Failed login
     res.sendFile(__dirname + "/failure.html");
   }
 });

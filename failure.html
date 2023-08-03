@@ -84,7 +84,7 @@
             <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">Failure...</h1>
-                <p class="col-md-8 fs-4">Oops, it looks like something went wrong with your signup. Please try again later.</p>
+                <p class="col-md-8 fs-4">Oops, it looks like something went wrong with your Log in. Please try again later.</p>
                 
                 <form action="">
                     <button class="btn btn-outline-secondary" type="submit" name="button">Try Again!</button>
@@ -92,11 +92,19 @@
             </div>
             </div>
 
-            <footer class="pt-3 mt-4 text-muted border-top">
-            &copy; 2022
+            <footer class="pt-3 mt-4 text-muted border-top">&copy; <span id="currentYear"></span>
             </footer>
         </div>
         </main>
     
+
+  <script>
+    function getCurrentYear() {
+      return new Date().getFullYear();
+    }
+
+    const currentYearElement = document.getElementById('currentYear');
+    currentYearElement.textContent = getCurrentYear();
+  </script>
   </body>
 </html>
