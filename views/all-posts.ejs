@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Posts</title>
+</head>
+<body>
+  <h1>All Posts</h1>
+  <ul>
+    <% for (const post of posts) { %>
+      <li>
+        <h2><%= post.title.rendered %></h2>
+        <p><%= post.content.rendered %></p>
+      </li>
+    <% } %>
+  </ul>
+</body>
+</html>

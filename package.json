@@ -1,0 +1,38 @@
+{
+  "name": "newsletter-singup",
+  "version": "1.0.0",
+  "description": "My newsletter for collecting emails",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kristijan L.",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.1",
+    "request": "^2.88.2",
+    "ts-node": "^10.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KichoX/Newsletter-SignUp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KichoX/Newsletter-SignUp/issues"
+  },
+  "homepage": "https://github.com/KichoX/Newsletter-SignUp#readme",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.3",
+    "@types/express-session": "^1.17.7"
+  },
+  "keywords": []
+}
